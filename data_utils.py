@@ -344,6 +344,8 @@ class DataProcessor:
         
         print("Size of vocab: %d (_PAD:0, _UNK:1)"%len(vocab_dict))
         vocabfilename = FLAGS.train_dir+"/vocab.txt"
+        if not os.path.exists(FLAGS.train_dir):
+            os.mkdir(FLAGS.train_dir)
         print("Writing vocab file: %s"%vocabfilename)
 
         foutput = open(vocabfilename,"w")

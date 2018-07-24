@@ -24,7 +24,7 @@ import tensorflow as tf
 
 tf.app.flags.DEFINE_string("tmp_directory", "/tmp", "Temporary directory used by rouge code.")
 
-tf.app.flags.DEFINE_string("use_gpu", "/gpu:3", "Specify which gpu to use.")
+tf.app.flags.DEFINE_string("use_gpu", "/gpu:0", "Specify which gpu to use.")
 
 ### Global setting
 
@@ -34,7 +34,7 @@ tf.app.flags.DEFINE_integer("model_to_load", 100, "Model to load for testing.")
 
 tf.app.flags.DEFINE_boolean("use_fp16", False, "Use fp16 instead of fp32.")
 
-tf.app.flags.DEFINE_string("data_mode",  "cnn", "cnn or dailymail or cnn-dailymail")
+tf.app.flags.DEFINE_string("data_mode",  "cnn-dailymail", "cnn or dailymail or cnn-dailymail")
 
 ### Pretrained wordembeddings features
 
@@ -99,7 +99,7 @@ tf.app.flags.DEFINE_integer("num_sample_rollout", 10, "Number of Multiple Oracle
 
 ### Training features
 
-tf.app.flags.DEFINE_string("train_dir", "/address/to/training/directory", "Training directory.")
+tf.app.flags.DEFINE_string("train_dir", "/home/yaser/working_dir/refresh/", "Training directory.")
 
 tf.app.flags.DEFINE_float("learning_rate", 0.001, "Learning rate.")
 
@@ -114,20 +114,20 @@ tf.app.flags.DEFINE_integer("training_checkpoint", 1, "How many training steps t
 # Pretrained wordembeddings data
 
 tf.app.flags.DEFINE_string("pretrained_wordembedding",  
-                           "/address/data/1-billion-word-language-modeling-benchmark-r13output.word2vec.vec", 
+                           "/home/yaser/data/refresh/data/1-billion-word-language-modeling-benchmark-r13output.word2vec.vec",
                            "Pretrained wordembedding file trained on the one million benchmark data.")
 
 # Data directory address
 
-tf.app.flags.DEFINE_string("preprocessed_data_directory", "/address/data/preprocessed-input-directory", 
+tf.app.flags.DEFINE_string("preprocessed_data_directory", "/home/yaser/data/refresh/data/preprocessed-input-directory",
                            "Pretrained news articles for various types of word embeddings.")
 
 tf.app.flags.DEFINE_string("gold_summary_directory", 
-                           "/address/data/Baseline-Gold-Models", 
+                           "/home/yaser/data/refresh/Baseline-Gold-Models",
                            "Gold summary directory.")
 
 tf.app.flags.DEFINE_string("doc_sentence_directory", 
-                           "/address/data/CNN-DM-Filtered-TokenizedSegmented", 
+                           "/home/yaser/data/refresh/data/CNN-DM-Filtered-TokenizedSegmented",
                            "Directory where document sentences are kept.")
 
 ############ Create FLAGS

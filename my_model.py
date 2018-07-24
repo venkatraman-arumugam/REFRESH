@@ -39,7 +39,7 @@ class MY_Model:
     self.vocab_embed_variable = model_utils.get_vocab_embed_variable(vocab_size)    
 
     ### Define Place Holders
-    self.document_placeholder = tf.placeholder("int32", [None, 
+    self.document_placeholder = tf.placeholder(dtype, [None,
                                                          (FLAGS.max_doc_length + FLAGS.max_title_length + FLAGS.max_image_length), 
                                                          FLAGS.max_sent_length], name='doc-ph')
     self.label_placeholder = tf.placeholder(dtype, [None, FLAGS.max_doc_length, FLAGS.target_label_size], name='label-ph')

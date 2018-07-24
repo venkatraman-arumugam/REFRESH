@@ -16,7 +16,7 @@ from __future__ import print_function
 import numpy as np
 import tensorflow as tf
 from tensorflow.python.ops import variable_scope
-from tensorflow.python.ops import seq2seq
+from tensorflow.contrib import legacy_seq2seq as seq2seq
 from tensorflow.python.ops import math_ops
 
 # from tf.nn import variable_scope
