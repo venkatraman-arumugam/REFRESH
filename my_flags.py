@@ -100,6 +100,10 @@ tf.app.flags.DEFINE_integer("num_sample_rollout", 10, "Number of Multiple Oracle
 
 tf.app.flags.DEFINE_string("train_dir", "/address/to/training/directory", "Training directory.")
 
+tf.app.flags.DEFINE_string("model_dir", "/address/to/model/directory", "Model directory.")
+
+tf.app.flags.DEFINE_string("predict_dir", "/address/to/predictions/directory", "Predicition directory.")
+
 tf.app.flags.DEFINE_float("learning_rate", 0.001, "Learning rate.")
 
 tf.app.flags.DEFINE_boolean("weighted_loss", True, "Weighted loss to ignore padded parts.")

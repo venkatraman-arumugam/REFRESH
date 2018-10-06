@@ -52,7 +52,7 @@ class Data:
         # Convert to softmax logits
         pred_logits = convert_logits_to_softmax(pred_logits, session=session)
         # Save Output Logits
-        np.save(FLAGS.train_dir+"/"+modelname+"."+self.data_type+"-prediction", pred_logits)
+        np.save(FLAGS.predict_dir+"/"+modelname+"."+self.data_type+"-prediction", pred_logits)
 
         # Writing
         pred_labels = predict_topranked(pred_logits, self.weights, self.filenames)
@@ -60,7 +60,7 @@ class Data:
         self.process_predictions_topranked(modelname+"."+self.data_type)
 
     def write_predictions(self, file_prefix, np_predictions, np_labels):
-        foutput = open(FLAGS.train_dir+"/"+file_prefix+".predictions", "w")
+        foutput = open(FLAGS.predict_dir+"/"+file_prefix+".predictions", "w")
         for fileindex in self.fileindices:
             filename = self.filenames[fileindex]
             foutput.write(filename+"\n")
@@ -80,10 +80,10 @@ class Data:
         foutput.close()
 
     def process_predictions_topranked(self, file_prefix):
-        predictiondata = open(FLAGS.train_dir+"/"+file_prefix+".predictions").read().strip().split("\n\n")
+        predictiondata = open(FLAGS.predict_dir+"/"+file_prefix+".predictions").read().strip().split("\n\n")
         # print len(predictiondata)
         
-        summary_dirname = FLAGS.train_dir+"/"+file_prefix+"-summary-topranked"
+        summary_dirname = FLAGS.predict_dir+"/"+file_prefix+"-summary-topranked"
         os.system("mkdir "+summary_dirname)
         
         for item in predictiondata:
@@ -108,12 +108,12 @@ class Data:
 
             # Read Sents in the document : Always use original sentences
             sent_filename = FLAGS.doc_sentence_directory + "/" + self.data_type +"/mainbody/"+fileid+".mainbody" 
-            docsents = open(sent_filename).readlines()
+            docsents = open(sent_filename, encoding="utf-8").readlines()
 
             # Top Ranked three sentences 
-            selected_sents = [docsents[sentid] for sentid in final_sentids if sentid < len(docsents)]
+            selected_sents = [docsents[sentid].encode("utf-8") for sentid in final_sentids if sentid < len(docsents)]
             # print(selected_sents)
-
+            selected_sents = map(str, selected_sents)
             summary_file.write("".join(selected_sents)+"\n")
             summary_file.close()
         

@@ -176,7 +176,7 @@ def train():
 
         # Save Model 
         print("MRT: Epoch "+str(epoch)+" : Saving model after epoch completion")
-        checkpoint_path = os.path.join(FLAGS.train_dir, "model.ckpt.epoch-"+str(epoch))
+        checkpoint_path = os.path.join(FLAGS.model_dir, "model.ckpt.epoch-"+str(epoch))
         model.saver.save(sess, checkpoint_path)
         
         # Backup Rouge Dict
@@ -199,7 +199,7 @@ def train():
         print("MRT: Epoch "+str(epoch)+" : Writing final validation summaries")
         validation_data.write_prediction_summaries(validation_logits, "model.ckpt.epoch-"+str(epoch), session=sess)
         # Extimate Rouge Scores
-        rouge_score = rouge_generator.get_full_rouge(FLAGS.train_dir+"/model.ckpt.epoch-"+str(epoch)+".validation-summary-topranked", "validation")
+        rouge_score = rouge_generator.get_full_rouge(FLAGS.predict_dir+"/model.ckpt.epoch-"+str(epoch)+".validation-summary-topranked", "validation")
         print("MRT: Epoch "+str(epoch)+" : Validation ("+str(len(validation_data.fileindices))+") rouge= {:.6f}".format(rouge_score))
         
         # break
@@ -238,8 +238,8 @@ def test():
       # sess.run(model.vocab_embed_variable.assign(word_embedding_array))
 
       # Select the model
-      if (os.path.isfile(FLAGS.train_dir+"/model.ckpt.epoch-"+str(FLAGS.model_to_load))):
-        selected_modelpath = FLAGS.train_dir+"/model.ckpt.epoch-"+str(FLAGS.model_to_load)
+      if (os.path.isfile(FLAGS.model_dir+"/model.ckpt.epoch-"+str(FLAGS.model_to_load)+".index")):
+        selected_modelpath = FLAGS.model_dir+"/model.ckpt.epoch-"+str(FLAGS.model_to_load)
       else:
         print("Model not found in checkpoint folder.")
         exit(0)
