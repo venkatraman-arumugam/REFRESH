@@ -325,7 +325,7 @@ class DataProcessor:
 
         embed_line = ""
         linecount = 0
-        with open(wordembed_filename, "r") as fembedd:
+        with open(wordembed_filename, "r",  encoding="utf") as fembedd:
             for line in fembedd:
                 if linecount == 0:
                     vocabsize = int(line.split()[0])
@@ -349,7 +349,8 @@ class DataProcessor:
         print("Writing vocab file: %s"%vocabfilename)
 
         foutput = open(vocabfilename,"w")
-        vocab_list = [(vocab_dict[key], key) for key in vocab_dict.keys()]
+        vocab_list = [(vocab_dict[key].encode("utf-8"), key) for key in vocab_dict.keys()]
+        vocab_list = map(str, vocab_list)
         vocab_list.sort()
         vocab_list = [item[1] for item in vocab_list]
         foutput.write("\n".join(vocab_list)+"\n")
