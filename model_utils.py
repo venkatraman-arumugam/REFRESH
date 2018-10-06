@@ -182,7 +182,7 @@ def simple_rnn(rnn_input, initial_state=None):
   
   # Setup RNNs
   dtype = tf.float16 if FLAGS.use_fp16 else tf.float32
-  rnn_outputs, rnn_state = tf.contrib.nn.static_rnn(cell_enc, rnn_input, dtype=dtype, initial_state=initial_state)
+  rnn_outputs, rnn_state = tf.nn.static_rnn(cell_enc, rnn_input, dtype=dtype, initial_state=initial_state)
   # print(rnn_outputs)
   # print(rnn_state)
   
