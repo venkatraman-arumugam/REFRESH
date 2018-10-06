@@ -138,7 +138,7 @@ def policy_network(vocab_embed_variable, document_placeholder, label_placeholder
         # UNK embedding trainable
         unk_embed_variable = variable_on_cpu("unk_embed", [1, FLAGS.wordembed_size], tf.constant_initializer(0), trainable=True)     
         # Get fullvocab_embed_variable
-        fullvocab_embed_variable = tf.concat(0, [pad_embed_variable, unk_embed_variable, vocab_embed_variable])
+        fullvocab_embed_variable = tf.concat([pad_embed_variable, unk_embed_variable, vocab_embed_variable], 0)
         # print(fullvocab_embed_variable)
         
         ### Lookup layer
@@ -349,7 +349,7 @@ def predict_labels(logits):
         logits_argmin = tf.expand_dims(logits_argmin, 2) # [FLAGS.batch_size, FLAGS.max_doc_length, 1]
         
         # Convert argmin and argmax to labels, works only if FLAGS.target_label_size = 2
-        labels = tf.concat(2, [logits_argmin, logits_argmax]) # [FLAGS.batch_size, FLAGS.max_doc_length, FLAGS.target_label_size]
+        labels = tf.concat( [logits_argmin, logits_argmax], 2) # [FLAGS.batch_size, FLAGS.max_doc_length, FLAGS.target_label_size]
         dtype = tf.float16 if FLAGS.use_fp16 else tf.float32
         labels = tf.cast(labels, dtype)
         
@@ -375,7 +375,7 @@ def estimate_ltheta_ot(logits, labels, future_rewards, actual_rewards, weights):
         diff_act_pred = actual_rewards - future_rewards # [FLAGS.batch_size, FLAGS.max_doc_length]
         diff_act_pred = tf.expand_dims(diff_act_pred, 2) # [FLAGS.batch_size, FLAGS.max_doc_length, 1]
         # Convert (FLAGS.target_label_size = 2)
-        diff_act_pred = tf.concat(2, [diff_act_pred, diff_act_pred]) # [FLAGS.batch_size, FLAGS.max_doc_length, FLAGS.target_label_size]
+        diff_act_pred = tf.concat([diff_act_pred, diff_act_pred], 2) # [FLAGS.batch_size, FLAGS.max_doc_length, FLAGS.target_label_size]
 
         # Reshape logits and labels to match the requirement of softmax_cross_entropy_with_logits
         logits = tf.reshape(logits, [-1, FLAGS.target_label_size]) # [FLAGS.batch_size*FLAGS.max_doc_length, FLAGS.target_label_size]
@@ -391,7 +391,7 @@ def estimate_ltheta_ot(logits, labels, future_rewards, actual_rewards, weights):
         
         # Multiply with weight
         weights = tf.expand_dims(weights, 2) # [FLAGS.batch_size, FLAGS.max_doc_length, 1]
-        weights = tf.concat(2, [weights, weights]) # [FLAGS.batch_size, FLAGS.max_doc_length, FLAGS.target_label_size]
+        weights = tf.concat([weights, weights], 2) # [FLAGS.batch_size, FLAGS.max_doc_length, FLAGS.target_label_size]
         d_ltheta_ot = tf.mul(d_ltheta_ot, weights) # [FLAGS.batch_size, FLAGS.max_doc_length, FLAGS.target_label_size]
 
         return d_ltheta_ot

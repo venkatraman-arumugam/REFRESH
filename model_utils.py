@@ -79,7 +79,7 @@ def reshape_list2tensor(listoftensors, n_steps, n_input):
   """Reshape lists of n_steps items with [?, n_input] to tensor [?, n_steps, n_input] 
   """
   # Reverse of _reshape_tensor2list
-  tensor = tf.concat(0, listoftensors, name="concat") # [n_steps * ?, n_input]
+  tensor = tf.concat(listoftensors, 0, name="concat") # [n_steps * ?, n_input]
   tensor = tf.reshape(tensor, [n_steps, -1, n_input], name='reshape') # [n_steps, ?, n_input]
   tensor = tf.transpose(tensor, perm=[1, 0, 2], name='transpose') # [?, n_steps, n_input] 
   return tensor
@@ -166,7 +166,7 @@ def conv1d_layer_sentence_representation(sent_wordembeddings):
     if FLAGS.handle_filter_output == "sum":
       final_representation = tf.add_n(representation_from_filters)
     else: 
-      final_representation = tf.concat(1, representation_from_filters)
+      final_representation = tf.concat( representation_from_filters, 1)
 
   return final_representation
 
@@ -247,9 +247,9 @@ def jporg_attentional_seqrnn_decoder(sents_ext, encoder_outputs, encoder_state, 
       with variable_scope.variable_scope("mlp"):
         combined_output = [] # batch_size, 2*size
         if FLAGS.doc_encoder_reverse:
-          combined_output = tf.concat(1, [output, encoder_outputs[(FLAGS.max_doc_length - 1) - i]])
+          combined_output = tf.concat([output, encoder_outputs[(FLAGS.max_doc_length - 1) - i]], 1)
         else:
-          combined_output = tf.concat(1, [output, encoder_outputs[i]])
+          combined_output = tf.concat( [output, encoder_outputs[i]], 1)
 
         logit = multilayer_perceptron(combined_output, weights, biases)
           

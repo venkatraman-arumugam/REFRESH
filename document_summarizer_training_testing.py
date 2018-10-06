@@ -63,9 +63,9 @@ def batch_predict_with_a_model(data, model, session=None):
     # print(data_logits) 
     
   # Convert list to tensors
-  data_logits = tf.concat(0, data_logits)
-  data_lables = tf.concat(0, data_labels)
-  data_weights = tf.concat(0, data_weights)
+  data_logits = tf.concat(data_logits, 0)
+  data_lables = tf.concat(data_labels, 0)
+  data_weights = tf.concat(data_weights, 0)
   # print(data_logits,data_lables,data_weights)
   return data_logits, data_lables, data_weights 
 
