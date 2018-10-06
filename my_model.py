@@ -67,9 +67,9 @@ class MY_Model:
     self.saver = tf.train.Saver(tf.all_variables(), max_to_keep=None)
 
     # Scalar Summary Operations
-    self.rewardweighted_ce_multisample_loss_summary = tf.scalar_summary("rewardweighted-cross-entropy-multisample-loss", self.rewardweighted_cross_entropy_loss_multisample)
-    self.taccuracy_summary = tf.scalar_summary("training_accuracy", self.accuracy)
-    self.vaccuracy_summary = tf.scalar_summary("validation_accuracy", self.final_accuracy)
+    self.rewardweighted_ce_multisample_loss_summary = tf.summary.scalar("rewardweighted-cross-entropy-multisample-loss", self.rewardweighted_cross_entropy_loss_multisample)
+    self.taccuracy_summary = tf.summary.scalar("training_accuracy", self.accuracy)
+    self.vaccuracy_summary = tf.summary.scalar("validation_accuracy", self.final_accuracy)
 
     # # Build the summary operation based on the TF collection of Summaries.
     # # self.summary_op = tf.merge_all_summaries()
@@ -81,4 +81,4 @@ class MY_Model:
     sess.run(init)
     
     # Create Summary Graph for Tensorboard
-    self.summary_writer = tf.train.SummaryWriter(FLAGS.train_dir, sess.graph)
+    self.summary_writer = tf.summary.FileWriter(FLAGS.train_dir, sess.graph)
