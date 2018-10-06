@@ -14,13 +14,13 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import numpy as np
-import tensorflow as tf
-import random
 import os
+import random
 
-from my_flags import FLAGS
+import numpy as np
+
 from model_utils import convert_logits_to_softmax, predict_topranked
+from my_flags import FLAGS
 
 # Special IDs
 PAD_ID = 0

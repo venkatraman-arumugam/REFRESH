@@ -182,7 +182,7 @@ def simple_rnn(rnn_input, initial_state=None):
   
   # Setup RNNs
   dtype = tf.float16 if FLAGS.use_fp16 else tf.float32
-  rnn_outputs, rnn_state = tf.nn.static.rnn(cell_enc, rnn_input, dtype=dtype, initial_state=initial_state)
+  rnn_outputs, rnn_state = tf.nn.static_rnn(cell_enc, rnn_input, dtype=dtype, initial_state=initial_state)
   # print(rnn_outputs)
   # print(rnn_state)
   
@@ -278,7 +278,7 @@ def _loop_function(current_inp, ext_logits, gold_logits):
   prev_logits = tf.split(1, FLAGS.target_label_size, prev_logits) # [[batch_size], [batch_size], ...]
   prev_weight_one = prev_logits[0]
     
-  updated_inp = tf.mul(current_inp, prev_weight_one)
+  updated_inp = tf.multiply(current_inp, prev_weight_one)
   # print(updated_inp)
 
   return updated_inp
@@ -339,7 +339,7 @@ def predict_topranked(batch_softmax_logits, batch_weights, batch_filenames):
       else:
         break
     oneprob_keys = oneprob_sentidx.keys()
-    oneprob_keys.sort(reverse=True)
+    sorted(oneprob_keys, reverse=True)
     
     # Rank sentences with scores: if same score lower ones ranked first
     sentindices = []
@@ -404,7 +404,7 @@ def predict_toprankedthree(batch_softmax_logits, batch_weights):
       else:
         break
     oneprob_keys = oneprob_sentidx.keys()
-    oneprob_keys.sort(reverse=True)
+    sorted(oneprob_keys, reverse=True)
     
     # Rank sentences with scores: if same score lower ones ranked first
     sentindices = []

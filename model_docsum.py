@@ -13,15 +13,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import numpy as np
-import tensorflow as tf
-from tensorflow.python.ops import variable_scope
-from tensorflow.contrib import legacy_seq2seq as seq2seq
-from tensorflow.python.ops import math_ops
-
 # from tf.nn import variable_scope
-from my_flags import FLAGS
-from model_utils import * 
+from model_utils import *
+
 
 ### Various types of extractor
 
@@ -129,7 +123,7 @@ def policy_network(vocab_embed_variable, document_placeholder, label_placeholder
     Returns:
     Outputs of sentence extractor and logits without softmax
     """
-    
+
     with tf.variable_scope('PolicyNetwork') as scope:
         
         ### Full Word embedding Lookup Variable

@@ -14,19 +14,17 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import numpy as np
-import tensorflow as tf
-import random
-import os
-import re
-import os.path
-
-from pyrouge import Rouge155
 import json
-from multiprocessing import Pool
+import os
+import os.path
 from contextlib import closing
+from multiprocessing import Pool
+
+import numpy as np
+from pyrouge import Rouge155
 
 from my_flags import FLAGS
+
 
 def _rouge(system_dir, gold_dir):
     # Run rouge

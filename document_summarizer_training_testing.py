@@ -15,19 +15,14 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import math
 import os
-import random
-import sys
-import time
 
-import numpy as np
 import tensorflow as tf
 
-from reward_utils import Reward_Generator
 from data_utils import DataProcessor
 from my_flags import FLAGS
 from my_model import MY_Model
+from reward_utils import Reward_Generator
 
 
 ######################## Batch Testing a model on some dataset ############
