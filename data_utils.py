@@ -300,7 +300,7 @@ class Data:
             doccount += 1
 
         # Set Fileindices
-        self.fileindices = range(len(self.filenames))
+        self.fileindices = list(range(len(self.filenames)))
 
 class DataProcessor:
     def prepare_news_data(self, vocab_dict, data_type="training"):
