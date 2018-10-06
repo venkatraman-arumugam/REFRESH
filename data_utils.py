@@ -349,10 +349,10 @@ class DataProcessor:
         print("Writing vocab file: %s"%vocabfilename)
 
         foutput = open(vocabfilename,"w")
-        vocab_list = [(vocab_dict[key].encode("utf-8"), key) for key in vocab_dict.keys()]
-        vocab_list = map(str, vocab_list)
+        vocab_list = [(vocab_dict[key], key) for key in vocab_dict.keys()]
         vocab_list.sort()
-        vocab_list = [item[1] for item in vocab_list]
+        vocab_list = [item[1].encode("utf-8") for item in vocab_list]
+        vocab_list = map(str, vocab_list)
         foutput.write("\n".join(vocab_list)+"\n")
         foutput.close()
         return vocab_dict, word_embedding_array
