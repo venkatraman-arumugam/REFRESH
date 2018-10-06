@@ -127,7 +127,7 @@ def conv1d_layer_sentence_representation(sent_wordembeddings):
       print("Error: Make sure (output_channel *  FLAGS.max_filter_length) is equal to FLAGS.sentembed_size.")
       exit(0)
   
-  for filterwidth in xrange(1,FLAGS.max_filter_length+1):
+  for filterwidth in range(1,FLAGS.max_filter_length+1):
     # print(filterwidth)
     
     with tf.variable_scope("Conv1D_%d"%filterwidth) as scope:
