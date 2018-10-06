@@ -72,7 +72,7 @@ def reshape_tensor2list(tensor, n_steps, n_input):
   # Reshaping to (n_steps*batch_size, n_input)
   tensor = tf.reshape(tensor, [-1, n_input], name='reshape')
   # Split to get a list of 'n_steps' tensors of shape (batch_size, n_input)
-  tensor = tf.split(0, n_steps, tensor, name='split')
+  tensor = tf.split(tensor, n_steps, 0, name='split')
   return tensor
 
 def reshape_list2tensor(listoftensors, n_steps, n_input):
