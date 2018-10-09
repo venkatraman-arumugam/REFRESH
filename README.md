@@ -1,10 +1,6 @@
 # Refresh: Ranking Sentences for Extractive Summarization with Reinforcement Learning
 
-This repository releases our code for the Refresh model. It is improved from our code for [Sidenet](https://github.com/shashiongithub/sidenet). It uses Tensorflow 0.10, please use scripts provided by Tensorflow to translate them to newer upgrades. 
-
-Please contact me at shashi.narayan@ed.ac.uk for any question.
-
-Please cite this paper if you use our code or data:
+Tensorflow 1.10.0 implementation of REFRESH. original implementation can find [here](https://github.com/EdinburghNLP/Refresh) 
 
 **Ranking Sentences for Extractive Summarization with Reinforcement Learning, Shashi Narayan, Shay B. Cohen and Mirella Lapata, NAACL 2018.**
 
