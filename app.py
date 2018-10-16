@@ -9,8 +9,8 @@ app.debug = True
 def summrize():
     text = request.json['text']
     serve = Preprocess()
-    summary = serve.run_textmode(text)
-    return json.dumps({'status': 'OK', 'summary': summary})
+    log, slead, srefresh, sgold = serve.run_textmode(text)
+    return json.dumps({'status': 'OK', 'log': log, "lead" : slead, "refresh" : srefresh, "sgold" : sgold})
 
 
 
