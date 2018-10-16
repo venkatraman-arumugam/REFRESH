@@ -29,7 +29,7 @@ tf.app.flags.DEFINE_string("use_gpu", "/gpu:3", "Specify which gpu to use.")
 
 tf.app.flags.DEFINE_string("exp_mode", "train", "Training 'train' or Test 'test' Mode.")
 
-tf.app.flags.DEFINE_integer("model_to_load", 100, "Model to load for testing.")
+tf.app.flags.DEFINE_integer("model_to_load", 8, "Model to load for testing.")
 
 tf.app.flags.DEFINE_boolean("use_fp16", False, "Use fp16 instead of fp32.")
 
@@ -100,7 +100,7 @@ tf.app.flags.DEFINE_integer("num_sample_rollout", 10, "Number of Multiple Oracle
 
 tf.app.flags.DEFINE_string("train_dir", "/address/to/training/directory", "Training directory.")
 
-tf.app.flags.DEFINE_string("model_dir", "/address/to/model/directory", "Model directory.")
+tf.app.flags.DEFINE_string("model_dir", "/address/to/model/directory/cnn-dailymail-reinforcementlearn-singlesample-from-moracle-noatt-sample5", "Model directory.")
 
 tf.app.flags.DEFINE_string("predict_dir", "/address/to/predictions/directory", "Predicition directory.")
 

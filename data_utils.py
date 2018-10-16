@@ -356,4 +356,52 @@ class DataProcessor:
         foutput.write("\n".join(vocab_list)+"\n")
         foutput.close()
         return vocab_dict, word_embedding_array
+
+    def prepare_document_modelIn(self, doc_lines, title_lines, image_lines):
+
+        def process_to_chop_pad(orgids, requiredsize):
+            if (len(orgids) >= requiredsize):
+                return orgids[:requiredsize]
+            else:
+                padids = [PAD_ID] * (requiredsize - len(orgids))
+                return (orgids + padids)
+
+                # Doc
+
+        thisdoc = []
+        for idx in range(FLAGS.max_doc_length):
+            thissent = []
+            if idx < len(doc_lines):
+                thissent = doc_lines[idx][:]
+            thissent = process_to_chop_pad(thissent, FLAGS.max_sent_length)
+            thisdoc.append(thissent)
+
+        # Title
+        thistitle = []
+        for idx in range(FLAGS.max_title_length):
+            thissent = []
+            if idx < len(title_lines):
+                thissent = title_lines[idx][:]
+            thissent = process_to_chop_pad(thissent, FLAGS.max_sent_length)
+            thistitle.append(thissent)
+
+        # Image
+        thisimage = []
+        for idx in range(FLAGS.max_image_length):
+            thissent = []
+            if idx < len(image_lines):
+                thissent = image_lines[idx][:]
+            thissent = process_to_chop_pad(thissent, FLAGS.max_sent_length)
+            thisimage.append(thissent)
+
+        document_modelIn = thisdoc[:] + thistitle[:] + thisimage[:]
+        # (FLAGS.max_doc_length + FLAGS.max_title_length + FLAGS.max_image_length), FLAGS.max_sent_length
+        # Numpy dtype
+        dtype = np.float16 if FLAGS.use_fp16 else np.float32
+
+        batch_document_modelIn = np.empty((1, (FLAGS.max_doc_length + FLAGS.max_title_length + FLAGS.max_image_length),
+                                           FLAGS.max_sent_length), dtype="int32")
+        batch_document_modelIn[0] = np.array(document_modelIn[:], dtype="int32")
+
+        return batch_document_modelIn
     
