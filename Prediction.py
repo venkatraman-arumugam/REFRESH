@@ -7,9 +7,9 @@ from my_flags import FLAGS
 
 class Summarizer:
     def __init__(self, vocab_dict, word_embedding_array):
+        tf.reset_default_graph()
         config = tf.ConfigProto(allow_soft_placement=True)
-        graph = tf.Graph().as_default()
-        self.session = tf.Session(config = config, graph=graph)
+        self.session = tf.Session(config = config)
 
         self.model = MY_Model(self.session, len(vocab_dict) - 2)
 
