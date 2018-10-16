@@ -13,7 +13,7 @@ class Summarizer:
 
         # Reload saved model and test
         print("Reading model parameters")
-        self.model.saver.restore(self.session,FLAGS.model_dir + 'model.ckpt.epoch-' + str(FLAGS.model_to_load))
+        self.model.saver.restore(self.session,FLAGS.model_dir + '/model.ckpt.epoch-' + str(FLAGS.model_to_load))
         print("Model loaded.")
 
         # Initialize word embedding before training
