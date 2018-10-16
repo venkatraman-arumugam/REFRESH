@@ -19,8 +19,8 @@ class Summarizer:
         print("Model loaded.")
 
         # Initialize word embedding before training
-        print("Initialize word embedding vocabulary with pretrained embeddings ...")
-        self.session.run(self.model.vocab_embed_variable.assign(word_embedding_array))
+        # print("Initialize word embedding vocabulary with pretrained embeddings ...")
+        # self.session.run(self.model.vocab_embed_variable.assign(word_embedding_array))
 
     def prediction(self, batch_document_modelIn, doclength):
         batch_logits = self.session.run(self.model.logits,
